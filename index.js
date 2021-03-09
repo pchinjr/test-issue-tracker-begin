@@ -1,4 +1,20 @@
+let tiny = require('tiny-json-http')
+let data = require('@begin/data')
+
 exports.handler = async function http(req) {
+
+  let url = 'https://api.github.com/repos/smallwins/begin-community/issues'
+  const issues = await tiny.get({url})
+  let first = issues.body.length
+
+  //save the number of issues per day
+  await data.set( {
+    table: issues,
+    number: first
+  })
+
+
+  //lookup number of issues and compare to previous days
 
   let html = `
 <!doctype html>
@@ -12,12 +28,11 @@ exports.handler = async function http(req) {
   <body>
 
     <h1 class="center-text">
-      <!-- ↓ Change "Hello world!" to something else and head on back to Begin! -->
-      Hello world!
+      Praise Cage
     </h1>
 
     <p class="center-text">
-      Your <a href="https://begin.com" class="link" target="_blank">Begin</a> app is ready to go!
+      There are ${JSON.stringify(first)} open issues
     </p>
 
   </body>
@@ -32,26 +47,3 @@ exports.handler = async function http(req) {
     body: html
   }
 }
-
-// Other example responses
-
-/* Forward requester to a new path
-exports.handler = async function http (req) {
-  return {
-    statusCode: 302,
-    headers: {'location': '/about'}
-  }
-}
-*/
-
-/* Respond with successful resource creation, CORS enabled
-let arc = require('@architect/functions')
-exports.handler = arc.http.async (http)
-async function http (req) {
-  return {
-    statusCode: 201,
-    json: { ok: true },
-    cors: true,
-  }
-}
-*/
