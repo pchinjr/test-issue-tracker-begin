@@ -9,7 +9,7 @@ exports.handler = async function http(req) {
 
   //save the number of issues per day
   await data.set({
-    table: issues,
+    table: 'issues',
     number: first
   })
 
