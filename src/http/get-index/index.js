@@ -3,6 +3,8 @@ let data = require('@begin/data')
 
 exports.handler = async function http(req) {
 
+  let date = new Date().toLocaleDateString
+
   let url = 'https://api.github.com/repos/smallwins/begin-community/issues'
   const issues = await tiny.get({ url })
   let first = issues.body.length
@@ -10,7 +12,8 @@ exports.handler = async function http(req) {
   //save the number of issues per day
   await data.set({
     table: 'issues',
-    number: first
+    number: first,
+    date:
   })
 
 
