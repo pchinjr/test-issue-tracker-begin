@@ -3,7 +3,9 @@ let data = require('@begin/data')
 
 exports.handler = async function http(req) {
 
-  let date = new Date().toLocaleDateString
+  let date = new Date().toLocaleDateString()
+
+  console.log(date)
 
   let url = 'https://api.github.com/repos/smallwins/begin-community/issues'
   const issues = await tiny.get({ url })
