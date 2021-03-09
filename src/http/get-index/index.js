@@ -13,7 +13,7 @@ exports.handler = async function http(req) {
   await data.set({
     table: 'issues',
     number: first,
-    date:
+    date: date
   })
 
 
