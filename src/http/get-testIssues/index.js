@@ -3,10 +3,23 @@ let data = require('@begin/data')
 
 exports.handler = async function http(req) {
 
-  //get the number of issues
-  const result = await data.get({
+  let date = new Date().toLocaleDateString()
+
+  console.log(date)
+
+  let url = 'https://api.github.com/repos/smallwins/begin-community/issues'
+  const issues = await tiny.get({ url })
+  let first = issues.body.length
+
+  //save the number of issues per day
+  await data.set({
     table: 'issues',
+    number: first,
+    date: date
   })
+
+
+  //lookup number of issues and compare to previous days
 
   let html = `
 <!doctype html>
@@ -18,15 +31,12 @@ exports.handler = async function http(req) {
     <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" rel="icon" type="image/x-icon">
   </head>
   <body>
-
     <h1 class="center-text">
       Praise Cage
     </h1>
-
     <p class="center-text">
-      There are ${JSON.stringify(result)}
+      There are ${JSON.stringify(first)} open issues
     </p>
-
   </body>
 </html>`
 
