@@ -5,6 +5,8 @@ issue-tracker
 get /
 get /testIssues
 
+post /api/delete/:issueKey
+
 @scheduled
 issues rate(1 day)
 

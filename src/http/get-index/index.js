@@ -24,7 +24,7 @@ exports.handler = async function http(req) {
     </h1>
 
     <p>
-      <ul>${(result.map(issue => `<li>${issue.date} ${issue.number}</li>`).join(' '))}</ul>
+      <ul>${(result.map(issue => `<li>${issue.date} ${issue.number} ${issue.key}</li>`).join(' '))}</ul>
 
     </p>
     <a href='/testIssues'> Add a test Issue </a>
