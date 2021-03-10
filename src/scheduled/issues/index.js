@@ -8,12 +8,12 @@ exports.handler = async function scheduled (event) {
 
   let url = 'https://api.github.com/repos/smallwins/begin-community/issues'
   const issues = await tiny.get({ url })
-  let first = issues.body.length
+  let numberOfIssues = issues.body.length
 
   //save the number of issues per day
   await data.set({
     table: 'issues',
-    number: first,
+    number: numberOfIssues,
     date: date
   })
 

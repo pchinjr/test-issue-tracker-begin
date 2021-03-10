@@ -8,6 +8,8 @@ exports.handler = async function http(req) {
     table: 'issues',
   })
 
+
+
   let html = `
 <!doctype html>
 <html lang=en>
@@ -24,7 +26,10 @@ exports.handler = async function http(req) {
     </h1>
 
     <p class="center-text">
-      There are ${JSON.stringify(result)}
+      There are ${(
+        result.map(issue => `<p>${issue.date} ${issue.key} ${issue.number}</p>`)
+        )}
+      <a href='/testIssues'> Add a test Issue </a>
     </p>
 
   </body>
