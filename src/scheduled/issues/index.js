@@ -5,7 +5,6 @@ let data = require('@begin/data')
 exports.handler = async function scheduled (event) {
   console.log(JSON.stringify(event, null, 2))
   let date = new Date().toLocaleDateString()
-
   let url = 'https://api.github.com/repos/smallwins/begin-community/issues'
   const issues = await tiny.get({ url })
   let numberOfIssues = issues.body.length

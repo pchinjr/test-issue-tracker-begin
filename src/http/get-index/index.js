@@ -8,8 +8,6 @@ exports.handler = async function http(req) {
     table: 'issues',
   })
 
-
-
   let html = `
 <!doctype html>
 <html lang=en>
@@ -25,12 +23,11 @@ exports.handler = async function http(req) {
       Praise Cage
     </h1>
 
-    <p class="center-text">
-      There are ${(
-        result.map(issue => `<p>${issue.date} ${issue.key} ${issue.number}</p>`)
-        )}
-      <a href='/testIssues'> Add a test Issue </a>
+    <p>
+      <ul>${(result.map(issue => `<li>${issue.date} ${issue.number}</li>`).join(' '))}</ul>
+
     </p>
+    <a href='/testIssues'> Add a test Issue </a>
 
   </body>
 </html>`

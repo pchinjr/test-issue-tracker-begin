@@ -4,17 +4,14 @@ let data = require('@begin/data')
 exports.handler = async function http(req) {
 
   let date = new Date().toLocaleDateString()
-
-  console.log(date)
-
   let url = 'https://api.github.com/repos/smallwins/begin-community/issues'
   const issues = await tiny.get({ url })
-  let first = issues.body.length
+  let numberOfIssues = issues.body.length
 
   //save the number of issues per day
   await data.set({
     table: 'issues',
-    number: first,
+    number: numberOfIssues,
     date: date
   })
 
@@ -35,7 +32,7 @@ exports.handler = async function http(req) {
       Praise Cage
     </h1>
     <p class="center-text">
-      There are ${JSON.stringify(first)} open issues
+      There are ${JSON.stringify(numberOfIssues)} open issues
     </p>
   </body>
 </html>`
